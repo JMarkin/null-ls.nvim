@@ -5,46 +5,41 @@ return helpers.make_builtin({
     name = "bandit",
     meta = {
         url = "https://github.com/PyCQA/bandit",
-        description = "Bandit is a tool designed to find common security issues in Python code.",
+        description =
+        [[Bandit is a tool designed to find common security issues in Python code. To do this Bandit
+            processes each file, builds an AST from it, and runs appropriate plugins against the AST nodes. Once Bandit
+            has finished scanning all the files it generates a report.]],
     },
     method = null_ls.methods.DIAGNOSTICS,
     filetypes = { "python" },
-    generator = helpers.generator_factory({
+    generator_opts = {
         command = "bandit",
-        name = "bandit",
+        to_stdin = false,
         args = {
-            "--format",
-            "json",
-            "-",
+            "-q",
+            "--msg-template",
+            "|{line}| |{col}| |{test_id}| |{severity}| |{msg}|",
+            "-f",
+            "custom",
+            "--exit-zero",
+            "$FILENAME",
         },
-        to_stdin = true,
-        from_stderr = false,
-        ignore_stderr = true,
-        format = "json",
-        check_exit_code = { 0, 1 },
-        on_output = function(params)
-            local parse = helpers.diagnostics.from_json({
-                attributes = {
-                    row = "line_number",
-                    col = "col_offset",
-                    code = "test_id",
-                    message = "issue_text",
-                    severity = "issue_severity",
-                },
-                offsets = { col = 1 },
-                severities = {
-                    HIGH = helpers.diagnostics.severities["error"],
-                    MEDIUM = helpers.diagnostics.severities["warning"],
-                    LOW = helpers.diagnostics.severities["information"],
-                },
-            })
-
-            if params.output then
-                params.output = params.output.results
-                return parse(params)
-            end
-
-            return {}
+        format = "line",
+        check_exit_code = function(code)
+            return code == 0
         end,
-    }),
+        on_output = helpers.diagnostics.from_pattern(
+            "|(.*)| |(.*)| |(.*)| |(.*)| |(.*)|",
+            { "row", "col", "code", "severity", "message" },
+            {
+                severities = {
+                    UNDEFINED = helpers.diagnostics.severities["hint"],
+                    LOW = helpers.diagnostics.severities["information"],
+                    MEDIUM = helpers.diagnostics.severities["warning"],
+                    HIGH = helpers.diagnostics.severities["error"],
+                },
+            }
+        ),
+    },
+    factory = helpers.generator_factory,
 })
