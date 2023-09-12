@@ -4,7 +4,7 @@ local methods = require("null-ls.methods")
 local FORMATTING = methods.internal.FORMATTING
 
 return h.make_builtin({
-    name = "nginx_beautifier",
+    name = "nginxbeautifier",
     meta = {
         url = "https://github.com/vasilevich/nginxbeautifier",
         description = "Beautifies and formats nginx configuration files.",
