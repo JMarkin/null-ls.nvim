@@ -262,7 +262,7 @@ return {
     formatting = { "topiary" }
   },
   nginx = {
-    formatting = { "nginx_beautifier" }
+    formatting = { "nginxbeautifier" }
   },
   nickel = {
     formatting = { "topiary" }
@@ -321,8 +321,8 @@ return {
   },
   python = {
     code_actions = { "refactoring" },
-    diagnostics = { "flake8", "mypy", "pycodestyle", "pydocstyle", "pylama", "pylint", "pyproject_flake8", "ruff", "semgrep", "vulture" },
-    formatting = { "autoflake", "autopep8", "black", "blackd", "blue", "isort", "pyflyby", "pyink", "reorder_python_imports", "ruff", "usort", "yapf" }
+    diagnostics = { "bandit", "dmypy", "flake8", "mypy", "pycodestyle", "pydocstyle", "pylama", "pylint", "pyproject_flake8", "ruff", "semgrep", "vulture" },
+    formatting = { "autoflake", "autopep8", "black", "blackd", "blue", "docformatter", "isort", "pyflyby", "pyink", "reorder_python_imports", "ruff", "usort", "yapf" }
   },
   qml = {
     diagnostics = { "qmllint" },

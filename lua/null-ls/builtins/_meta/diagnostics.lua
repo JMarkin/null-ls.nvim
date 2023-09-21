@@ -10,6 +10,9 @@ return {
   ansiblelint = {
     filetypes = { "yaml.ansible" }
   },
+  bandit = {
+    filetypes = { "python" }
+  },
   bslint = {
     filetypes = { "brs" }
   },
@@ -75,6 +78,9 @@ return {
   },
   djlint = {
     filetypes = { "django", "jinja.html", "htmldjango" }
+  },
+  dmypy = {
+    filetypes = { "python" }
   },
   dotenv_linter = {
     filetypes = { "sh" }

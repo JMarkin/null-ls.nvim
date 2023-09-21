@@ -443,6 +443,25 @@ local sources = { null_ls.builtins.diagnostics.ansiblelint }
 - Command: `ansible-lint`
 - Args: `{ "-f", "codeclimate", "-q", "--nocolor", "$FILENAME" }`
 
+### [bandit](https://github.com/PyCQA/bandit)
+
+Bandit is a tool designed to find common security issues in Python code. To do this Bandit
+            processes each file, builds an AST from it, and runs appropriate plugins against the AST nodes. Once Bandit
+            has finished scanning all the files it generates a report.
+
+#### Usage
+
+```lua
+local sources = { null_ls.builtins.diagnostics.bandit }
+```
+
+#### Defaults
+
+- Filetypes: `{ "python" }`
+- Method: `diagnostics`
+- Command: `bandit`
+- Args: `{ "-q", "--msg-template", "|{line}| |{col}| |{test_id}| |{severity}| |{msg}|", "-f", "custom", "--exit-zero", "$FILENAME" }`
+
 ### [bslint](https://github.com/rokucommunity/bslint)
 
 A brighterscript CLI tool to lint your code without compiling your project.
@@ -874,6 +893,24 @@ local sources = { null_ls.builtins.diagnostics.djlint }
 - Method: `diagnostics`
 - Command: `djlint`
 - Args: `{ "--quiet", "-" }`
+
+### [dmypy](https://github.com/python/mypy)
+
+Mypy is an optional static type checker for Python that aims to combine the
+benefits of dynamic (or "duck") typing and static typing.
+
+#### Usage
+
+```lua
+local sources = { null_ls.builtins.diagnostics.dmypy }
+```
+
+#### Defaults
+
+- Filetypes: `{ "python" }`
+- Method: `diagnostics`
+- Command: `dmypy`
+- Args: dynamically resolved (see [source](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/diagnostics/dmypy.lua))
 
 ### [dotenv_linter](https://github.com/dotenv-linter/dotenv-linter)
 
@@ -3027,6 +3064,23 @@ local sources = { null_ls.builtins.formatting.djlint }
 - Command: `djlint`
 - Args: `{ "--reformat", "-" }`
 
+### [docformatter](https://github.com/PyCQA/docformatter)
+
+Formats Python docstrings to follow PEP 257
+
+#### Usage
+
+```lua
+local sources = { null_ls.builtins.formatting.docformatter }
+```
+
+#### Defaults
+
+- Filetypes: `{ "python" }`
+- Method: `formatting`
+- Command: `docformatter`
+- Args: dynamically resolved (see [source](https://github.com/jose-elias-alvarez/null-ls.nvim/blob/main/lua/null-ls/builtins/formatting/docformatter.lua))
+
 ### [dprint](https://dprint.dev/)
 
 A pluggable and configurable code formatting platform written in Rust.
@@ -3775,14 +3829,14 @@ local sources = { null_ls.builtins.formatting.mix }
 - Command: `mix`
 - Args: `{ "format", "--stdin-filename", "$FILENAME", "-" }`
 
-### [nginx_beautifier](https://github.com/vasilevich/nginxbeautifier)
+### [nginxbeautifier](https://github.com/vasilevich/nginxbeautifier)
 
 Beautifies and formats nginx configuration files.
 
 #### Usage
 
 ```lua
-local sources = { null_ls.builtins.formatting.nginx_beautifier }
+local sources = { null_ls.builtins.formatting.nginxbeautifier }
 ```
 
 #### Defaults
